@@ -14,6 +14,24 @@
     <body>
         <div ng-app="blogApp" ng-controller="blogCtrl">
             <div class="headerStats">there are {{allPostsAndComments.length}} topics available</div>
+            <br>
+            <!-- 2 for each loops for topics and comments -->
+        <div ng-show="showTopic">
+            <div ng-repeat="topic in allPostsAndComments" class="topicHead">{{topic.title}}
+            <br>{{topic.body}}<br><br>
+                <div ng-repeat="comment in topic.comments" class="commentHead">{{comment.name}} said:
+                    <br>{{comment.message}}
+                </div>
+                <button ng-click="addComment(topic.id)" class="editCommentButton">comment on {{topic.title}}</button>
+                    <div ng-show="showAddComment[topic.id]">
+                    <textarea placeholder="opinions are like assholes"></textarea>
+                    <button ng-click="submitComment(topic.id)">comment</button>
+                    </div>
+                <button ng-click="editPost(topic.id)" class="editCommentButton">edit {{topic.title}}</button>
+                <br><br><hr>
+            </div>
+        </div>
+
         </div>
     </body>
 </html>

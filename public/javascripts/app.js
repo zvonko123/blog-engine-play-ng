@@ -14,11 +14,35 @@ angular.module('blogApp').controller('blogCtrl',
 
                 $scope.allPostsAndComments = response.data;
                 console.log("fetched",response.data);
+
+                $scope.showAddComment = [];
+
+                for (i=0;i<$scope.allPostsAndComments.length;i++)
+                {
+                    $scope.showAddComment[i] = false;
+                }
+
             });
 
 
         };
 
         $scope.freshData();
+
+
+        $scope.showTopic = true;
+
+
+
+        //we use the topic id
+        $scope.addComment = function(id){
+            if ($scope.showAddComment[id])
+            {
+                $scope.showAddComment[id] = false;
+            }
+            else{
+                $scope.showAddComment[id] = true;
+            }
+        };
 
     });
