@@ -17,21 +17,27 @@
             <br>
             <!-- 2 for each loops for topics and comments -->
         <div ng-show="showTopic">
-            <div ng-repeat="topic in allPostsAndComments" class="topicHead">{{topic.title}}
+            <div ng-repeat="topic in allPostsAndComments track by $index" class="topicHead">{{topic.title}}
             <br>{{topic.body}}<br><br>
                 <div ng-repeat="comment in topic.comments" class="commentHead">{{comment.name}} said:
                     <br>{{comment.message}}
                 </div>
+
                 <button ng-click="addComment(topic.id)" class="editCommentButton">comment on {{topic.title}}</button>
                     <div ng-show="showAddComment[topic.id]">
-                    <textarea placeholder="opinions are like assholes"></textarea>
-                    <button ng-click="submitComment(topic.id)">comment</button>
+                        <textarea placeholder="opinions are like assholes"></textarea>
+                        <button ng-click="submitComment(topic.id)">comment</button>
                     </div>
-                <button ng-click="editPost(topic.id)" class="editCommentButton">edit {{topic.title}}</button>
-                <br><br><hr>
+                <button ng-click="editPost($index)" class="editCommentButton">edit {{topic.title}}</button>
+                <br>
+                <br>
+                <hr>
             </div>
         </div>
-
+            <div ng-show="showEditTopicArea">
+                <textarea ng-model="topicToEdit.body"></textarea>
+                <button ng-click="submitEditPost(topicToEdit.id)">finish editing</button>
+            </div>
         </div>
     </body>
 </html>

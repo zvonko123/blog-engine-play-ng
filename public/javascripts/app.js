@@ -45,4 +45,10 @@ angular.module('blogApp').controller('blogCtrl',
             }
         };
 
+        $scope.editPost = function(index){
+            $scope.showTopic = false;
+            $scope.topicToEdit = $scope.allPostsAndComments[index];
+            $scope.showEditTopicArea = true;
+        };
+
     });
