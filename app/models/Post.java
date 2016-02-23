@@ -69,7 +69,7 @@ public class Post {
 
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "post_comment", joinColumns = { @JoinColumn(name = "post_id") }, inverseJoinColumns = { @JoinColumn(name = "comment_id") })
+    @JoinTable(name = "PostComment", joinColumns = { @JoinColumn(name = "post_id") }, inverseJoinColumns = { @JoinColumn(name = "comment_id") })
     public Set<Comment> getComments() {
         return this.comments;
     }

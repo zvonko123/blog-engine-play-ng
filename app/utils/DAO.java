@@ -1,9 +1,12 @@
 package utils;
 
 import com.google.common.collect.Lists;
+import models.Comment;
 import models.Post;
+import models.PostComment;
 import play.db.jpa.JPA;
 
+import javax.persistence.Query;
 import java.util.List;
 
 /**
@@ -36,4 +39,13 @@ public class DAO {
         });
         return posts;
     };
+
+    public void addComment(Comment comment, String post_id) {
+        JPA.withTransaction(() -> {
+            JPA.em().persist(comment);
+            //parameters need sanitizing
+            JPA.em().persist(new PostComment(post_id,comment.getId()));
+
+        });
+    }
 }

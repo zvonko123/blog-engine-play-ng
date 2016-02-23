@@ -23,8 +23,25 @@ angular.module('blogApp').controller('blogCtrl',
                 }
 
             });
+        };
 
+        $scope.addComment = function (topic_id) {
+            console.log("trying to post comment from ",$scope.commentName);
+            $http({
+                method: 'POST',
+                url: 'http://localhost:9000/addComment',
+                data: JSON.stringify({topic_id : topic_id.toString(),name :$scope.commentName,message : $scope.commentMessage})
+            }).then(function (response) {
+                console.log("comment added",response.data);
 
+                $scope.showAddComment = [];
+
+                for (i=0;i<$scope.allPostsAndComments.length;i++)
+                {
+                    $scope.showAddComment[i] = false;
+                }
+
+            });
         };
 
         $scope.freshData();
@@ -35,15 +52,21 @@ angular.module('blogApp').controller('blogCtrl',
 
 
         //we use the topic id
-        $scope.addComment = function(id){
-            if ($scope.showAddComment[id])
+        $scope.addCommentArea = function(topic_id){
+            if ($scope.showAddComment[topic_id])
             {
-                $scope.showAddComment[id] = false;
+                $scope.showAddComment[topic_id] = false;
             }
             else{
-                $scope.showAddComment[id] = true;
+                $scope.showAddComment[topic_id] = true;
             }
         };
+
+        $scope.submitComment = function(topic_id){
+            $scope.addComment(topic_id);
+            console.log("name and message",$scope.commentName,$scope.commentMessage);
+        };
+
 
         $scope.editPost = function(index){
             $scope.showTopic = false;

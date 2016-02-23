@@ -10,3 +10,6 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 #fetch all posts and comments
 POST    /getFreshData               controllers.Application.getFreshData()
+
+#T0D0 add comment with persist and manual insert (there is a better way)
+POST    /addComment                 controllers.Application.addComment()

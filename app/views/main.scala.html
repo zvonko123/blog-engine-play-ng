@@ -23,10 +23,13 @@
                     <br>{{comment.message}}
                 </div>
 
-                <button ng-click="addComment(topic.id)" class="editCommentButton">comment on {{topic.title}}</button>
+                <button ng-click="addCommentArea(topic.id)" class="editCommentButton">comment on {{topic.title}}</button>
                     <div ng-show="showAddComment[topic.id]">
-                        <textarea placeholder="opinions are like assholes"></textarea>
+                        <input type="text" ng-model="$parent.commentName" placeholder="your name">
+                        <br>
+                        <textarea ng-model="$parent.commentMessage" placeholder="opinions are like assholes"></textarea>
                         <button ng-click="submitComment(topic.id)">comment</button>
+
                     </div>
                 <button ng-click="editPost($index)" class="editCommentButton">edit {{topic.title}}</button>
                 <br>
@@ -34,6 +37,7 @@
                 <hr>
             </div>
         </div>
+
             <div ng-show="showEditTopicArea">
                 <textarea ng-model="topicToEdit.body"></textarea>
                 <button ng-click="submitEditPost(topicToEdit.id)">finish editing</button>

@@ -17,6 +17,12 @@ public class Comment {
     public Comment() {
     }
 
+    public Comment(String name, String message) {
+        this.name = name;
+        this.message = message;
+
+    }
+
     @Column
     public String getName() {
         return name;
