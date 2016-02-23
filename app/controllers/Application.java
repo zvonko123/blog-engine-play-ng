@@ -20,12 +20,16 @@ public class Application extends Controller {
     //a web method which gives our frontend all the fresh posts and comments
     public Result getFreshData() {
 
-        return ok(Json.toJson(DAO.findAllPosts()));
+        return ok(Json.toJson(DAO.getInstance().findAllPosts()));
+    }
+
+    public Result addComment(){
+        
     }
 
     public Result index() {
 
-        return ok(index.render(DAO.findAllPosts().size() +" topics total"));
+        return ok(index.render(DAO.getInstance().findAllPosts().size() +" topics total"));
     }
 
 }

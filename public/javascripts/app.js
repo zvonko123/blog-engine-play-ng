@@ -51,4 +51,10 @@ angular.module('blogApp').controller('blogCtrl',
             $scope.showEditTopicArea = true;
         };
 
+        $scope.submitEditPost = function(){
+            //add POST request for DB update
+            $scope.showTopic = true;
+            $scope.showEditTopicArea = false;
+        }
+
     });
