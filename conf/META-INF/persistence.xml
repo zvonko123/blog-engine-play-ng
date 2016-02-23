@@ -8,8 +8,11 @@
         <non-jta-data-source>DefaultDS</non-jta-data-source>
 
         <class>models.Post</class>
+        <class>models.Comment</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.enable_lazy_load_no_trans" value="true"/>
+
         </properties>
     </persistence-unit>
 
