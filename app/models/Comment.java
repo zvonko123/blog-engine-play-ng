@@ -8,12 +8,32 @@ import javax.persistence.*;
 @Entity
 public class Comment {
 
-    public Comment() {
-    }
+    public String message;
 
     public String id;
 
-    public String message;
+    public String name;
+
+    public Comment() {
+    }
+
+    @Column
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Column
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
 
     @GeneratedValue
