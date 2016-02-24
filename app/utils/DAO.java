@@ -13,7 +13,7 @@ import java.util.List;
  * Created by zv0 on 23.02.16..
  */
 
-//singleton for DAObject
+//singleton  DAObject
 public class DAO {
 
     private static DAO dao = null;

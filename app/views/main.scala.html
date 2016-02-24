@@ -13,34 +13,39 @@
     </head>
     <body>
         <div ng-app="blogApp" ng-controller="blogCtrl">
-            <div class="headerStats">there are {{allPostsAndComments.length}} topics available</div>
+            <div class="headerStats">there are {{allPostsAndComments.length}} posts available</div>
             <br>
-            <!-- 2 for each loops for topics and comments -->
-        <div ng-show="showTopic">
-            <div ng-repeat="topic in allPostsAndComments track by $index" class="topicHead">{{topic.title}}
-            <br>{{topic.body}}<br><br>
-                <div ng-repeat="comment in topic.comments" class="commentHead">{{comment.name}} said:
+            <!-- 2 for each loops for posts and comments -->
+        <div ng-show="showPost">
+            <div ng-repeat="post in allPostsAndComments track by $index" class="postHead">{{post.title}}
+            <br>{{post.body}}<br><br>
+                <div ng-repeat="comment in post.comments" class="commentHead">{{comment.name}} said:
                     <br>{{comment.message}}
                 </div>
 
-                <button ng-click="addCommentArea(topic.id)" class="editCommentButton">comment on {{topic.title}}</button>
-                    <div ng-show="showAddComment[topic.id]">
+                <button ng-click="addCommentArea(post.id)" class="editCommentButton">comment on {{post.title}}</button>
+                    <div ng-show="showAddComment[post.id]">
                         <input type="text" ng-model="$parent.commentName" placeholder="your name">
                         <br>
                         <textarea ng-model="$parent.commentMessage" placeholder="opinions are like assholes"></textarea>
-                        <button ng-click="submitComment(topic.id)">comment</button>
+                        <button ng-click="submitComment(post.id)">comment</button>
 
                     </div>
-                <button ng-click="editPost($index)" class="editPostButton">edit {{topic.title}}</button>
+                <button ng-click="editPost($index)" class="editPostButton">edit {{post.title}}</button>
                 <br>
                 <br>
                 <hr>
             </div>
         </div>
 
-            <div ng-show="showEditTopicArea">
-                <input type="text" ng-model="topicToEdit.title">
-                <textarea ng-model="topicToEdit.body"></textarea>
+            <div ng-show="showNewPostArea">
+                <input type="text" ng-model="newPost.title"><br>
+                <textarea ng-model="newPost.body"></textarea>
+                <button ng-click="submitEditPost()">finish editing</button>
+            </div>
+            <div ng-show="showEditPostArea">
+                <input type="text" ng-model="postToEdit.title"><br>
+                <textarea ng-model="postToEdit.body"></textarea>
                 <button ng-click="submitEditPost()">finish editing</button>
             </div>
         </div>

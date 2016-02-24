@@ -26,7 +26,7 @@ public class Application extends Controller {
         String body = requestData.get("body");
         String post_id = requestData.get("post_id");
 
-        //either its edited (with post_id) or a new topic(with no id)
+        //either its edited (with post_id) or a new post(with no id)
         Post post=null;
         if (post_id != "null")
         {
@@ -52,17 +52,17 @@ public class Application extends Controller {
         DynamicForm requestData = Form.form().bindFromRequest();
         String name = requestData.get("name");
         String message = requestData.get("message");
-        String topic_id = requestData.get("topic_id");
+        String post_id = requestData.get("post_id");
         Comment comment = new Comment(name,message);
 
-        DAO.getInstance().addComment(comment,topic_id);
+        DAO.getInstance().addComment(comment,post_id);
 
-        return ok(Json.toJson("success commenting topic "+topic_id));
+        return ok(Json.toJson("success commenting post "+post_id));
     }
 
     public Result index() {
 
-        return ok(index.render(DAO.getInstance().findAllPosts().size() +" topics total"));
+        return ok(index.render(DAO.getInstance().findAllPosts().size() +" posts total"));
     }
 
 }

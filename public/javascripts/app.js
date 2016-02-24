@@ -48,11 +48,11 @@ angular.module('blogApp').controller('blogCtrl',
         $scope.freshData();
 
 
-        $scope.showTopic = true;
+        $scope.showPost = true;
 
 
 
-        //we use the topic id
+        //we use the post id
         $scope.addCommentArea = function(post_id){
             if ($scope.showAddComment[post_id])
             {
@@ -70,9 +70,9 @@ angular.module('blogApp').controller('blogCtrl',
 
 
         $scope.editPost = function(index){
-            $scope.showTopic = false;
-            $scope.topicToEdit = $scope.allPostsAndComments[index];
-            $scope.showEditTopicArea = true;
+            $scope.showPost = false;
+            $scope.postToEdit = $scope.allPostsAndComments[index];
+            $scope.showEditPostArea = true;
         };
 
         $scope.addNewPost = function(){
@@ -81,14 +81,14 @@ angular.module('blogApp').controller('blogCtrl',
 
         $scope.submitEditPost = function(){
             //add POST request for DB update
-            $scope.showTopic = true;
-            $scope.showEditTopicArea = false;
+            $scope.showPost = true;
+            $scope.showEditPostArea = false;
 
-            console.log("trying to submit edited post..",$scope.topicToEdit.title);
+            console.log("trying to submit edited post..",$scope.postToEdit.title);
             $http({
                 method: 'POST',
                 url: 'http://localhost:9000/addPost',
-                data: JSON.stringify({post_id : $scope.topicToEdit.id,body :$scope.topicToEdit.body,title: $scope.topicToEdit.title})
+                data: JSON.stringify({post_id : $scope.postToEdit.id,body :$scope.postToEdit.body,title: $scope.postToEdit.title})
             }).then(function (response) {
                 console.log("edit success",response.data);
                 $scope.freshData();
