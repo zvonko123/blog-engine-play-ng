@@ -41,6 +41,7 @@ angular.module('blogApp').controller('blogCtrl',
                     $scope.showAddComment[i] = false;
                 }
 
+                $scope.freshData();
             });
         };
 
