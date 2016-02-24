@@ -48,7 +48,7 @@ angular.module('blogApp').controller('blogCtrl',
         $scope.freshData();
 
 
-        $scope.showPost = true;
+        $scope.showPosts = true;
 
 
 
@@ -70,18 +70,34 @@ angular.module('blogApp').controller('blogCtrl',
 
 
         $scope.editPost = function(index){
-            $scope.showPost = false;
+            $scope.showPosts = false;
             $scope.postToEdit = $scope.allPostsAndComments[index];
             $scope.showEditPostArea = true;
         };
 
-        $scope.addNewPost = function(){
+        $scope.submitNewPost = function(){
+            $scope.showPosts = true;
+            $scope.showNewPostArea = false;
+
+            console.log("trying to submit new post..",$scope.newPost.title);
+            $http({
+                method: 'POST',
+                url: 'http://localhost:9000/addPost',
+                data: JSON.stringify({post_id : null,body :$scope.newPost.body,title: $scope.newPost.title})
+            }).then(function (response) {
+                console.log("add new post success",response.data);
+                $scope.freshData();
+            });
 
         };
 
+        $scope.showNewPostArea = function(){
+            $scope.showPosts = false;
+            $scope.showNewPostArea = true;
+        };
+
         $scope.submitEditPost = function(){
-            //add POST request for DB update
-            $scope.showPost = true;
+            $scope.showPosts = true;
             $scope.showEditPostArea = false;
 
             console.log("trying to submit edited post..",$scope.postToEdit.title);

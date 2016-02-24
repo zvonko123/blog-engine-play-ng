@@ -28,17 +28,19 @@ public class Application extends Controller {
 
         //either its edited (with post_id) or a new post(with no id)
         Post post=null;
-        if (post_id != "null")
+        if (post_id != null)
         {
             post = new Post(post_id,title,body);
+            DAO.getInstance().editPost(post);
         }
         else{
             post = new Post(title,body);
+            DAO.getInstance().addPost(post);
         }
 
-        DAO.getInstance().addPost(post);
 
-        return ok(Json.toJson("success add/edit post "+title));
+
+        return ok(Json.toJson("success in add/edit post "+title));
     }
 
     //a web method which gives our frontend all the fresh posts and comments

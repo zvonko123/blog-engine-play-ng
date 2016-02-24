@@ -51,7 +51,7 @@ public class DAO {
 
     //for some reason, we cant persist the object created manually with id in constructor
     //so we fetch the Post with find(primarykey) and update the body and title on it
-    public void addPost(Post post) {
+    public void editPost(Post post) {
         JPA.withTransaction(() -> {
             Post postToModify = JPA.em().find(Post.class,post.getId());
             postToModify.setBody(post.getBody());
@@ -59,6 +59,12 @@ public class DAO {
 
             JPA.em().persist(postToModify);
 
+        });
+    }
+
+    public void addPost(Post post) {
+        JPA.withTransaction(() -> {
+            JPA.em().persist(post);
         });
     }
 }
