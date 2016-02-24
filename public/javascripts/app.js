@@ -25,12 +25,12 @@ angular.module('blogApp').controller('blogCtrl',
             });
         };
 
-        $scope.addComment = function (topic_id) {
+        $scope.addComment = function (post_id) {
             console.log("trying to post comment from ",$scope.commentName);
             $http({
                 method: 'POST',
                 url: 'http://localhost:9000/addComment',
-                data: JSON.stringify({topic_id : topic_id.toString(),name :$scope.commentName,message : $scope.commentMessage})
+                data: JSON.stringify({post_id : post_id.toString(),name :$scope.commentName,message : $scope.commentMessage})
             }).then(function (response) {
                 console.log("comment added",response.data);
 
@@ -53,18 +53,18 @@ angular.module('blogApp').controller('blogCtrl',
 
 
         //we use the topic id
-        $scope.addCommentArea = function(topic_id){
-            if ($scope.showAddComment[topic_id])
+        $scope.addCommentArea = function(post_id){
+            if ($scope.showAddComment[post_id])
             {
-                $scope.showAddComment[topic_id] = false;
+                $scope.showAddComment[post_id] = false;
             }
             else{
-                $scope.showAddComment[topic_id] = true;
+                $scope.showAddComment[post_id] = true;
             }
         };
 
-        $scope.submitComment = function(topic_id){
-            $scope.addComment(topic_id);
+        $scope.submitComment = function(post_id){
+            $scope.addComment(post_id);
             console.log("name and message",$scope.commentName,$scope.commentMessage);
         };
 
@@ -75,10 +75,25 @@ angular.module('blogApp').controller('blogCtrl',
             $scope.showEditTopicArea = true;
         };
 
+        $scope.addNewPost = function(){
+
+        };
+
         $scope.submitEditPost = function(){
             //add POST request for DB update
             $scope.showTopic = true;
             $scope.showEditTopicArea = false;
+
+            console.log("trying to submit edited post..",$scope.topicToEdit.title);
+            $http({
+                method: 'POST',
+                url: 'http://localhost:9000/addPost',
+                data: JSON.stringify({post_id : $scope.topicToEdit.id,body :$scope.topicToEdit.body,title: $scope.topicToEdit.title})
+            }).then(function (response) {
+                console.log("edit success",response.data);
+                $scope.freshData();
+            });
+
         }
 
     });

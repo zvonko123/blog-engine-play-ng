@@ -20,6 +20,27 @@ import java.util.List;
 public class Application extends Controller {
 
 
+    public Result addPost() {
+        DynamicForm requestData = Form.form().bindFromRequest();
+        String title = requestData.get("title");
+        String body = requestData.get("body");
+        String post_id = requestData.get("post_id");
+
+        //either its edited (with post_id) or a new topic(with no id)
+        Post post=null;
+        if (post_id != "null")
+        {
+            post = new Post(post_id,title,body);
+        }
+        else{
+            post = new Post(title,body);
+        }
+
+        DAO.getInstance().addPost(post);
+
+        return ok(Json.toJson("success add/edit post "+title));
+    }
+
     //a web method which gives our frontend all the fresh posts and comments
     public Result getFreshData() {
 

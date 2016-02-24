@@ -28,6 +28,12 @@ public class Post {
         this.setBody(body);
     }
 
+    public Post(String post_id, String title, String body) {
+        this.setTitle(title);
+        this.setBody(body);
+        this.setId(Integer.parseInt(post_id));
+    }
+
     @Override
     public String toString() {
         return "Post{" +

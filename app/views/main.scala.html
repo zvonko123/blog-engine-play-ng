@@ -31,7 +31,7 @@
                         <button ng-click="submitComment(topic.id)">comment</button>
 
                     </div>
-                <button ng-click="editPost($index)" class="editCommentButton">edit {{topic.title}}</button>
+                <button ng-click="editPost($index)" class="editPostButton">edit {{topic.title}}</button>
                 <br>
                 <br>
                 <hr>
@@ -39,8 +39,9 @@
         </div>
 
             <div ng-show="showEditTopicArea">
+                <input type="text" ng-model="topicToEdit.title">
                 <textarea ng-model="topicToEdit.body"></textarea>
-                <button ng-click="submitEditPost(topicToEdit.id)">finish editing</button>
+                <button ng-click="submitEditPost()">finish editing</button>
             </div>
         </div>
     </body>

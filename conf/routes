@@ -11,5 +11,8 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 #fetch all posts and comments
 POST    /getFreshData               controllers.Application.getFreshData()
 
-#T0D0 add comment with persist and manual insert (there is a better way)
+#add comment with persist in DAO
 POST    /addComment                 controllers.Application.addComment()
+
+#add Topic with persist in DAO
+POST    /addPost                 controllers.Application.addPost()
