@@ -49,8 +49,8 @@ angular.module('blogApp').controller('blogCtrl',
 
 
         $scope.showPosts = true;
-
-
+        $scope.newPostAreaShow = false;
+        $scope.editPostAreaShow = false;
 
         //we use the post id
         $scope.addCommentArea = function(post_id){
@@ -72,12 +72,18 @@ angular.module('blogApp').controller('blogCtrl',
         $scope.editPost = function(index){
             $scope.showPosts = false;
             $scope.postToEdit = $scope.allPostsAndComments[index];
-            $scope.showEditPostArea = true;
+            $scope.editPostAreaShow = true;
         };
+
+        $scope.back = function() {
+            $scope.showPosts = true;
+            $scope.newPostAreaShow = false;
+
+        }
 
         $scope.submitNewPost = function(){
             $scope.showPosts = true;
-            $scope.showNewPostArea = false;
+            $scope.newPostAreaShow = false;
 
             console.log("trying to submit new post..",$scope.newPost.title);
             $http({
@@ -93,12 +99,12 @@ angular.module('blogApp').controller('blogCtrl',
 
         $scope.showNewPostArea = function(){
             $scope.showPosts = false;
-            $scope.showNewPostArea = true;
+            $scope.newPostAreaShow = true;
         };
 
         $scope.submitEditPost = function(){
             $scope.showPosts = true;
-            $scope.showEditPostArea = false;
+            $scope.editPostAreaShow = false;
 
             console.log("trying to submit edited post..",$scope.postToEdit.title);
             $http({

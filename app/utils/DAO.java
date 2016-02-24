@@ -34,7 +34,7 @@ public class DAO {
         final List<Post> posts= Lists.newArrayList();
 
         JPA.withTransaction(() -> {
-            posts.addAll(JPA.em().createQuery("select e from Post e", Post.class).getResultList());
+            posts.addAll(JPA.em().createQuery("select e from Post e order by timestamp asc", Post.class).getResultList());
 
         });
         return posts;

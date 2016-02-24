@@ -41,12 +41,13 @@
             </div>
         </div>
 
-            <div ng-show="showNewPostArea">
+            <div ng-show="newPostAreaShow">
                 <input placeholder="post title" type="text" ng-model="newPost.title"><br>
                 <textarea placeholder="post body" ng-model="newPost.body"></textarea>
+                <button ng-click="back()">back</button>
                 <button ng-click="submitNewPost()">post it</button>
             </div>
-            <div ng-show="showEditPostArea">
+            <div ng-show="editPostAreaShow">
                 <input type="text" ng-model="postToEdit.title"><br>
                 <textarea ng-model="postToEdit.body"></textarea>
                 <button ng-click="submitEditPost()">finish editing</button>
