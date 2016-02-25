@@ -1,10 +1,10 @@
-var demoApp = angular.module('blogApp',['wysiwyg.module','ngSanitize']);
+var demoApp = angular.module('blogApp', ['wysiwyg.module', 'ngSanitize']);
 
 angular.module('blogApp').controller('blogCtrl',
-    function ($scope,$http,$filter,$sce) {
+    function ($scope, $http, $filter, $sce) {
 
 
-        $scope.trustAsHtml = function(string) {
+        $scope.trustAsHtml = function (string) {
             return $sce.trustAsHtml(string);
         };
 
@@ -18,12 +18,11 @@ angular.module('blogApp').controller('blogCtrl',
             }).then(function (response) {
 
                 $scope.allPostsAndComments = response.data;
-                console.log("fetched",response.data);
+                console.log("fetched", response.data);
 
                 $scope.showAddComment = [];
 
-                for (i=0;i<$scope.allPostsAndComments.length;i++)
-                {
+                for (i = 0; i < $scope.allPostsAndComments.length; i++) {
                     $scope.showAddComment[i] = false;
                 }
 
@@ -31,18 +30,21 @@ angular.module('blogApp').controller('blogCtrl',
         };
 
         $scope.addComment = function (post_id) {
-            console.log("trying to post comment from ",$scope.commentName);
+            console.log("trying to post comment from ", $scope.commentName);
             $http({
                 method: 'POST',
                 url: 'http://localhost:9000/addComment',
-                data: JSON.stringify({post_id : post_id.toString(),name :$scope.commentName,message : $scope.commentMessage})
+                data: JSON.stringify({
+                    post_id: post_id.toString(),
+                    name: $scope.commentName,
+                    message: $scope.commentMessage
+                })
             }).then(function (response) {
-                console.log("comment added",response.data);
+                console.log("comment added", response.data);
 
                 $scope.showAddComment = [];
 
-                for (i=0;i<$scope.allPostsAndComments.length;i++)
-                {
+                for (i = 0; i < $scope.allPostsAndComments.length; i++) {
                     $scope.showAddComment[i] = false;
                 }
 
@@ -58,66 +60,69 @@ angular.module('blogApp').controller('blogCtrl',
         $scope.editPostAreaShow = false;
 
         //we use the post id
-        $scope.addCommentArea = function(post_id){
-            if ($scope.showAddComment[post_id])
-            {
+        $scope.addCommentArea = function (post_id) {
+            if ($scope.showAddComment[post_id]) {
                 $scope.showAddComment[post_id] = false;
             }
-            else{
+            else {
                 $scope.showAddComment[post_id] = true;
             }
         };
 
-        $scope.submitComment = function(post_id){
+        $scope.submitComment = function (post_id) {
             $scope.addComment(post_id);
-            console.log("name and message",$scope.commentName,$scope.commentMessage);
+            console.log("name and message", $scope.commentName, $scope.commentMessage);
         };
 
 
-        $scope.editPost = function(index){
+        $scope.editPost = function (index) {
             $scope.showPosts = false;
             $scope.postToEdit = $scope.allPostsAndComments[index];
             $scope.editPostAreaShow = true;
         };
 
-        $scope.back = function() {
+        $scope.back = function () {
             $scope.showPosts = true;
             $scope.newPostAreaShow = false;
 
         }
 
-        $scope.submitNewPost = function(){
+        $scope.submitNewPost = function () {
             $scope.showPosts = true;
             $scope.newPostAreaShow = false;
 
-            console.log("trying to submit new post..",$scope.newPost.title);
+            console.log("trying to submit new post..", $scope.newPost.title);
             $http({
                 method: 'POST',
                 url: 'http://localhost:9000/addPost',
-                data: JSON.stringify({post_id : null,body :$scope.newPost.body,title: $scope.newPost.title})
+                data: JSON.stringify({post_id: null, body: $scope.newPost.body, title: $scope.newPost.title})
             }).then(function (response) {
-                console.log("add new post success",response.data);
+                console.log("add new post success", response.data);
                 $scope.freshData();
             });
 
         };
 
-        $scope.showNewPostArea = function(){
+        $scope.showNewPostArea = function () {
             $scope.showPosts = false;
             $scope.newPostAreaShow = true;
         };
 
-        $scope.submitEditPost = function(){
+        $scope.submitEditPost = function () {
             $scope.showPosts = true;
             $scope.editPostAreaShow = false;
 
-            console.log("trying to submit edited post..",$scope.postToEdit.title);
+            console.log("trying to submit edited post..", $scope.postToEdit.title);
             $http({
                 method: 'POST',
                 url: 'http://localhost:9000/addPost',
-                data: JSON.stringify({post_id : $scope.postToEdit.id,body :$scope.postToEdit.body,title: $scope.postToEdit.title})
+                data: JSON.stringify({
+                    post_id: $scope.postToEdit.id,
+                    body: $scope.postToEdit.body,
+                    title: $scope.postToEdit.title
+                })
             }).then(function (response) {
-                console.log("edit success",response.data);
+                console.log("edit success", response.data);
                 $scope.freshData();
             });
 

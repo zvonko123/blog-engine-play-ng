@@ -18,33 +18,33 @@ public class DAO {
 
     private static DAO dao = null;
 
-    public static  DAO getInstance()
-    {
-        synchronized(DAO.class){
-            if (dao == null)
-            {
-                dao= new DAO();
+    public static DAO getInstance() {
+        synchronized (DAO.class) {
+            if (dao == null) {
+                dao = new DAO();
             }
         }
         return dao;
 
     }
 
-    public List<Post> findAllPosts(){
-        final List<Post> posts= Lists.newArrayList();
+    public List<Post> findAllPosts() {
+        final List<Post> posts = Lists.newArrayList();
 
         JPA.withTransaction(() -> {
             posts.addAll(JPA.em().createQuery("select e from Post e order by timestamp asc", Post.class).getResultList());
 
         });
         return posts;
-    };
+    }
+
+    ;
 
     public void addComment(Comment comment, String post_id) {
         JPA.withTransaction(() -> {
             JPA.em().persist(comment);
             //parameters need sanitizing
-            JPA.em().persist(new PostComment(post_id,comment.getId()));
+            JPA.em().persist(new PostComment(post_id, comment.getId()));
 
         });
     }
@@ -53,7 +53,7 @@ public class DAO {
     //so we fetch the Post with find(primarykey) and update the body and title on it
     public void editPost(Post post) {
         JPA.withTransaction(() -> {
-            Post postToModify = JPA.em().find(Post.class,post.getId());
+            Post postToModify = JPA.em().find(Post.class, post.getId());
             postToModify.setBody(post.getBody());
             postToModify.setTitle(post.getTitle());
 

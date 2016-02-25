@@ -38,7 +38,7 @@ public class Post {
     public String toString() {
         return "Post{" +
                 "title='" + title + '\'' +
-                "} with "+comments.size()+" comments";
+                "} with " + comments.size() + " comments";
     }
 
     @Column
@@ -75,7 +75,7 @@ public class Post {
 
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "PostComment", joinColumns = { @JoinColumn(name = "post_id") }, inverseJoinColumns = { @JoinColumn(name = "comment_id") })
+    @JoinTable(name = "PostComment", joinColumns = {@JoinColumn(name = "post_id")}, inverseJoinColumns = {@JoinColumn(name = "comment_id")})
     @OrderBy("timestamp ASC")
     public Set<Comment> getComments() {
         return this.comments;
