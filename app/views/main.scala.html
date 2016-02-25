@@ -8,8 +8,16 @@
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
         <script src="@routes.Assets.versioned("javascripts/hello.js")" type="text/javascript"></script>
+
+        <script src="https://code.jquery.com/jquery-2.2.1.min.js" type="text/javascript"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular-sanitize.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo= sha512-2e8qq0ETcfWRI4HJBzQiA3UoyFk6tbNyG+qSaIBZLyW9Xf3sWZHN/lxe9fTh1U45DpPf07yj94KsUHHWe4Yk1A==" crossorigin="anonymous"></script>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <script src="@routes.Assets.versioned("javascripts/bootstrap-colorpicker-module.js")" type="text/javascript"></script>
         <script src="@routes.Assets.versioned("javascripts/app.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.versioned("javascripts/angular-wysiwyg.js")" type="text/javascript"></script>
     </head>
     <body>
         <div ng-app="blogApp" ng-controller="blogCtrl">
@@ -19,6 +27,13 @@
         <div ng-show="showPosts">
             <button ng-click="showNewPostArea()">new post</button>
             <br>
+            <hr>
+            <br>
+            <ul>
+                <li ng-repeat="post in allPostsAndComments"  ng-bind-html="trustAsHtml(post.body)">
+                    {{post.body}}
+                </li>
+            </ul>
             <hr>
             <div ng-repeat="post in allPostsAndComments track by $index" class="postHead">{{post.title}}
             <br>{{post.body}}<br><br>
@@ -43,7 +58,7 @@
 
             <div ng-show="newPostAreaShow">
                 <input placeholder="post title" type="text" ng-model="newPost.title"><br>
-                <textarea placeholder="post body" ng-model="newPost.body"></textarea>
+                <wysiwyg placeholder="post body" ng-model="newPost.body"></wysiwyg>
                 <button ng-click="back()">back</button>
                 <button ng-click="submitNewPost()">post it</button>
             </div>

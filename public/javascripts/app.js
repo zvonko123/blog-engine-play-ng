@@ -1,7 +1,12 @@
-var demoApp = angular.module('blogApp',[]);
+var demoApp = angular.module('blogApp',['wysiwyg.module','ngSanitize']);
 
 angular.module('blogApp').controller('blogCtrl',
-    function ($scope,$http,$filter) {
+    function ($scope,$http,$filter,$sce) {
+
+
+        $scope.trustAsHtml = function(string) {
+            return $sce.trustAsHtml(string);
+        };
 
         //fetch fresh data from server
         $scope.freshData = function () {
