@@ -30,13 +30,16 @@
             <hr>
             <br>
             <ul>
-                <li ng-repeat="post in allPostsAndComments"  ng-bind-html="trustAsHtml(post.body)">
-                    {{post.body}}
+                <li ng-repeat="post in allPostsAndComments">
+                    {{post.title}}
                 </li>
             </ul>
             <hr>
-            <div ng-repeat="post in allPostsAndComments track by $index" class="postHead">{{post.title}}
-            <br>{{post.body}}<br><br>
+            <div ng-repeat="post in allPostsAndComments track by $index" class="postHead">
+                {{post.title}}
+            <br>
+                <span ng-bind-html="trustAsHtml(post.body)" >{{post.body}}</span>
+            <br><br>
                 <div ng-repeat="comment in post.comments" class="commentHead">{{comment.name}} said:
                     <br>{{comment.message}}
                 </div>
@@ -64,7 +67,7 @@
             </div>
             <div ng-show="editPostAreaShow">
                 <input type="text" ng-model="postToEdit.title"><br>
-                <textarea ng-model="postToEdit.body"></textarea>
+                <wysiwyg placeholder="post body" ng-model="postToEdit.body"></wysiwyg>
                 <button ng-click="submitEditPost()">finish editing</button>
             </div>
         </div>
