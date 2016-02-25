@@ -76,6 +76,7 @@ public class Post {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "PostComment", joinColumns = { @JoinColumn(name = "post_id") }, inverseJoinColumns = { @JoinColumn(name = "comment_id") })
+    @OrderBy("timestamp ASC")
     public Set<Comment> getComments() {
         return this.comments;
     }
